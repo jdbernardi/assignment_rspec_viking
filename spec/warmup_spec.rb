@@ -35,7 +35,7 @@ let(:warmup) { Warmup.new }
 
 	describe '#triple_size' do
 
-		let(:double_array) { double( "Array", size: 2 ) }
+		let(:double_array) { instance_double( "Array", size: 2 ) }
 
 
 		it 'should take in a double and return trip size' do
@@ -44,6 +44,41 @@ let(:warmup) { Warmup.new }
 
 
 		end
+
+	end #/.triple_size
+
+
+
+
+	describe '#calls_some_methods' do
+
+		let(:up) { "String", upcase!: "CAPITALS" }
+		let(:rev) { "String", reverse!: "SLATIPAC" }
+
+
+		it 'string passed should receive #upcase!' do
+
+
+			expect( warmup.calls_some_methods( double ) ).to receive( :upcase! ).with("HELLO")
+			#expect( string ).to receive( :reverse! ).with("HELLO")
+
+
+			warmup = Warmup.new
+			warmup.calls_some_methods( "hi" )
+
+
+
+
+    end
+
+
+
+
+
+		it 'string passed should receive #reverse!'
+
+		it 'should return a different object than passed in'
+
 
 	end
 
