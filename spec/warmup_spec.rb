@@ -8,6 +8,7 @@ Look through the warmup.rb file and look at the existing methods on class Warmup
 
 require 'warmup'
 require 'spec_helper'
+require 'pry'
 
 
 
@@ -17,16 +18,33 @@ let(:warmup) { Warmup.new }
 
 	describe '#gets_shout' do
 
-		it 'should return user input as shout' do
+		it 'should return user input : shout' do
 
-			allow(warmup.gets_shout).to receive(:gets).and_return("HI")
 
-			expect(warmup.gets_shout).to eq("HI")
+			allow( warmup ).to receive( :gets_shout ).and_return( "hi" )
+
+			expect( warmup.gets_shout ).to eq( "hi" )
+
 
 		end
 
+		it 'should puts shout'
 
 	end
 
+
+	describe '#triple_size' do
+
+		let(:double_array) { double( "Array", size: 2 ) }
+
+
+		it 'should take in a double and return trip size' do
+
+			expect( warmup.triple_size( double_array ) ).to eq( 6 )
+
+
+		end
+
+	end
 
 end
