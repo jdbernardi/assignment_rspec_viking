@@ -49,25 +49,23 @@ let(:warmup) { Warmup.new }
 
 
 
-
 	describe '#calls_some_methods' do
 
-		let(:up) { "String", upcase!: "CAPITALS" }
-		let(:rev) { "String", reverse!: "SLATIPAC" }
+
+		let(:string) { "string" }
+
+		it 'string passed in should receive #upcase!' do
 
 
-		it 'string passed should receive #upcase!' do
+			#expect( warmup ).to receive(:calls_some_methods)
 
+			expect( string ).to receive(:upcase!)
+			
 
-			expect( warmup.calls_some_methods( double ) ).to receive( :upcase! ).with("HELLO")
-			#expect( string ).to receive( :reverse! ).with("HELLO")
+			#expect( warmup.calls_some_methods("string")).to receive(:reverse!).and_return( nil )
+			#warmup.calls_some_methods("string")
 
-
-			warmup = Warmup.new
-			warmup.calls_some_methods( "hi" )
-
-
-
+			warmup.calls_some_methods( string )
 
     end
 

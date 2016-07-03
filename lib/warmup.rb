@@ -29,13 +29,13 @@ class Warmup
   # For this method, write separate tests to show:
   #   1. The string you pass in receives the #upcase!
   #       method call,
-  #   2. The string you pass in receives the #reverse! 
+  #   2. The string you pass in receives the #reverse!
   #      method call,
   #   3. Your method actually returns a completely different
   #       object than the one you passed in
   def calls_some_methods(string)
-    loud_string = string.upcase!
-    loud_string.reverse!
+    string.upcase!
+    string.reverse!
     return "I am unrelated"
   end
 
