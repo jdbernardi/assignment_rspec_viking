@@ -4,16 +4,33 @@ require 'viking'
 
 describe '.Viking' do
 
+	let(:viking){ Viking.new("Joe", 150) }
 
 	describe '#initialize' do
 
-		it 'sets the viking name when passed in'
+		it 'sets the viking name when passed in' do
 
-		it 'sets the health attribute when passed in'
+			expect( viking.name ).to eq( "Joe" )
 
-		it 'health attr cannot be overwritten once set'
+		end
 
-		it 'Vikings weapon is nil when initialized'
+		it 'sets the health attribute when passed in' do
+
+			expect( viking.health ).to eq( 150 )
+
+		end
+
+		it 'health attr cannot be overwritten once set' do
+
+			expect{ viking.health = 1000 }.to raise_error( NoMethodError )
+
+		end
+
+		it 'Vikings weapon is nil when initialized' do
+
+			expect( viking.weapon ).to be_nil
+
+		end
 
 
 
