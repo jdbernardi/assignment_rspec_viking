@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'viking'
+require 'weapons/weapon'
 
 
 describe '.Viking' do
@@ -39,9 +40,28 @@ describe '.Viking' do
 
 	describe '#pick_up_weapon' do
 
-		it 'should set the weapon to viking when picked up'
+		it 'should set the weapon to viking when picked up' do
 
-		it 'should raise exception when not a weapon'
+			sven =  Viking.new
+
+			sven.pick_up_weapon( Bow.new(2) )
+
+			expect( sven.weapon.name ).to eq( "Bow" )
+
+
+		end
+
+
+
+		it 'should raise exception when not a weapon' do
+
+			expect{ viking.pick_up_weapon( "rock" ) }.to raise_error( "can't pick up that thing" )
+
+
+
+		end
+
+
 
 		it 'replaces existing weapon when called'
 

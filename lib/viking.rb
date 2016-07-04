@@ -1,11 +1,12 @@
 require_relative 'weapons/axe'
 require_relative 'weapons/bow'
 require_relative 'weapons/fists'
+require 'pry'
 
 class Viking
   attr_reader :health, :strength, :name, :weapon
 
-  def initialize(name="RandomViking", health = 100, strength = 10, weapon = nil)
+  def initialize(name = "RandomViking", health = 100, strength = 10, weapon = nil)
     @name = name
     @health = health
     @strength = strength
