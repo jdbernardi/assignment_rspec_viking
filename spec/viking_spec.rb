@@ -133,12 +133,12 @@ describe '.Viking' do
 		end
 
 
-
+# stubbing methods on a double, what does that mean exactly, what methods are stubbed (already in the code as replacements?), how are those stubbed if they call other methods as well?
 
 		it 'should call #take_damage when called' do
 
-# how to make multiple calls in the method?
-			allow( sven.receive_attack( 10 ) ).to receive( :take_damage ).with( damage )
+			allow( sven ).to receive(:puts).and_return("")
+			expect( sven ).to receive( :take_damage )
 
 			viking.attack( sven )
 
@@ -148,16 +148,25 @@ describe '.Viking' do
 
 
 		# use a double here?
-		it 'should call #damage_fists when no weapons'
+		it 'should call #damage_fists when no weapons' do
+
+			allow( sven ).to receive( :take_damage )
+			expect( sven ).to receive( :damage_with_fists )
+
+			sven.attack( viking )
+
+		end
 
 		it 'should deal Fists multiplier times strength damage when attacking with no weapons' do
 
 
 			oleg = Viking.new( "Oleg", 150, 100 )
 			# strength( 100 ) * fists (.25 ) = 25
-			oleg.attack( viking )
+
 
 			expect( viking.health ).to eq( 125 )
+
+			oleg.attack( viking )
 
 
 		end
