@@ -34,7 +34,7 @@ class Viking
     @weapon = nil
   end
 
-  private
+  #private
   def damage_dealt
     if @weapon
       damage_with_weapon

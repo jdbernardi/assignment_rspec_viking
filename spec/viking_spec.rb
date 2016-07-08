@@ -9,6 +9,8 @@ describe '.Viking' do
 	let(:sven){ Viking.new }
 	let(:damage){ 10 }
 
+
+
 	describe '#initialize' do
 
 		it 'sets the viking name when passed in' do
@@ -108,8 +110,9 @@ describe '.Viking' do
 
 		it 'should call #take_damage' do
 
+			# why does this work?
 
-			expect( viking ).to receive( :take_damage ).with( damage )
+			expect( viking ).to receive( :take_damage )
 
 			viking.receive_attack( damage )
 
@@ -137,7 +140,6 @@ describe '.Viking' do
 
 		it 'should call #take_damage when called' do
 
-			allow( sven ).to receive(:puts).and_return("")
 			expect( sven ).to receive( :take_damage )
 
 			viking.attack( sven )
@@ -145,13 +147,17 @@ describe '.Viking' do
 
 		end
 
-
+#       #<Viking:0x007fb408aa1b30> received :receive_attack with unexpected arguments
+#         expected: (:damage_dealt)
+#              got: (2.5)
+#        Please stub a default value first if message might be received with other args as well.
 
 		# use a double here?
+		# when a method takes a parameter is that when you have to use .with?
 		it 'should call #damage_fists when no weapons' do
 
-			allow( sven ).to receive( :take_damage )
-			expect( sven ).to receive( :damage_with_fists )
+
+			expect( viking ).to receive( :damage_with_fists )
 
 			sven.attack( viking )
 
