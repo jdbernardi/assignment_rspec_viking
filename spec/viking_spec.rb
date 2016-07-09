@@ -69,7 +69,6 @@ describe '.Viking' do
 
 			viking.pick_up_weapon( Axe.new )
 
-			# is this the proper call? why does @weapon.name or weapon not work?
 			expect( viking.weapon.class ).to eq( Axe )
 
 		end
@@ -179,8 +178,6 @@ describe '.Viking' do
 			expect( viking.damage_dealt ).to eq( 20 )
 
 
-
-
 		end
 
 
@@ -192,8 +189,6 @@ describe '.Viking' do
 			bob.attack( viking )
 
 			expect( viking.health ).to eq( 140 )
-
-
 
 		end
 
@@ -207,16 +202,15 @@ describe '.Viking' do
 
 			expect( viking.damage_dealt ).to eq( 2.5 )
 
-
 		end
+
+
 
 		it 'raises an error when Viking is killed' do
 
 			bob = Viking.new( "Bob", 1, 10 )
 
 			expect{ viking.attack( bob ) }.to raise_error("#{bob.name} has Died...")
-
-
 
 		end
 
