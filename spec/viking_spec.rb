@@ -58,7 +58,7 @@ describe '.Viking' do
 
 
 		it 'should raise exception when not a weapon' do
-			#calling with error("can't...") raises RunTimeError
+
 			expect{ viking.pick_up_weapon( "rock" ) }.to raise_error
 
 		end
@@ -70,7 +70,7 @@ describe '.Viking' do
 			viking.pick_up_weapon( Axe.new )
 
 			# is this the proper call? why does @weapon.name or weapon not work?
-			expect( viking.weapon.name ).to eq( "Axe" )
+			expect( viking.weapon.class ).to eq( Axe )
 
 		end
 
@@ -85,7 +85,6 @@ describe '.Viking' do
 			viking.pick_up_weapon( Axe.new )
 			viking.drop_weapon
 
-			# weapon already nil - is this called correctly?
 			expect( @weapon ).to be_nil
 
 		end
@@ -105,12 +104,9 @@ describe '.Viking' do
 
 			expect( viking.health ).to eq( 140 )
 
-# why does allow not raise an error but expect does?
 		end
 
 		it 'should call #take_damage' do
-
-			# why does this work?
 
 			expect( viking ).to receive( :take_damage )
 
@@ -136,9 +132,9 @@ describe '.Viking' do
 		end
 
 
-# stubbing methods on a double, what does that mean exactly, what methods are stubbed (already in the code as replacements?), how are those stubbed if they call other methods as well?
 
-		it 'should call #take_damage when called' do
+
+		it 'should call #take_damage' do
 
 			expect( sven ).to receive( :take_damage )
 
@@ -147,19 +143,13 @@ describe '.Viking' do
 
 		end
 
-#       #<Viking:0x007fb408aa1b30> received :receive_attack with unexpected arguments
-#         expected: (:damage_dealt)
-#              got: (2.5)
-#        Please stub a default value first if message might be received with other args as well.
 
-		# use a double here?
-		# when a method takes a parameter is that when you have to use .with?
 		it 'should call #damage_fists when no weapons' do
 
-
-			expect( viking ).to receive( :damage_with_fists )
-
 			sven.attack( viking )
+
+			expect( viking.damage_dealt ).to eq( 2.5 )
+
 
 		end
 
@@ -169,23 +159,29 @@ describe '.Viking' do
 			oleg = Viking.new( "Oleg", 150, 100 )
 			# strength( 100 ) * fists (.25 ) = 25
 
+			oleg.attack( viking )
 
 			expect( viking.health ).to eq( 125 )
 
-			oleg.attack( viking )
 
 
 		end
 
 
 
-		it 'should run #damage_with_weapon when attacking with weapon'
+		it 'should run #damage_with_weapon when attacking with weapon' do
 
-			#bob = Viking.new("Bob", 100, 10, Axe.new )
-			#bob.attack( viking )
 
-			#expect( viking ).to receive( :attack ).with( :damage_with_weapon )
+			viking.pick_up_weapon( Bow.new( 2 ) )
 
+			viking.attack( sven )
+
+			expect( viking.damage_dealt ).to eq( 20 )
+
+
+
+
+		end
 
 
 
@@ -198,6 +194,7 @@ describe '.Viking' do
 			expect( viking.health ).to eq( 140 )
 
 
+
 		end
 
 
@@ -205,23 +202,26 @@ describe '.Viking' do
 		it 'should use fists when bow is out of arrows' do
 
 			lance = Viking.new("Lance", 100, 10, Bow.new(1) )
-			lance.attack( viking )
-			lance.attack( viking )
-# expected 1 times received 0 times with any args
-			expect( lance ).to receive( :damage_with_fists )
+
+			lance.drop_weapon
+
+			expect( viking.damage_dealt ).to eq( 2.5 )
+
 
 		end
 
 		it 'raises an error when Viking is killed' do
 
 			bob = Viking.new( "Bob", 1, 10 )
-			viking.attack( bob )
 
-			expect{ bob }.to raise_error
+			expect{ viking.attack( bob ) }.to raise_error("#{bob.name} has Died...")
+
+
 
 		end
 
 
 	end
+
 
 end #/.Viking

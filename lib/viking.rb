@@ -57,9 +57,11 @@ class Viking
   end
 
   def take_damage(damage)
+
     @health -= damage
     check_death
     @health
+
   end
 
   def check_death
