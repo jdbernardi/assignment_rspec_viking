@@ -1,11 +1,3 @@
-=begin
-Look through the warmup.rb file and look at the existing methods on class Warmup. Use the hints in the comments, then write a spec/warmup_spec.rb file that does the following things:
-
-1. stubs out #gets so you can test the result of the #gets_shout method
-2.passes in a double or instance double to #triple_size that respond to a method call for size
-3.checks that all the method calls inside #calls_some_methods actually fire. Note that this is a pretty artificial example, but we want you getting the muscle memory.
-=end
-
 require 'warmup'
 require 'spec_helper'
 require 'pry'
@@ -56,14 +48,7 @@ let(:warmup) { Warmup.new }
 
 		it 'string passed in should receive #upcase!' do
 
-
-			#expect( warmup ).to receive(:calls_some_methods)
-
 			expect( string ).to receive(:upcase!)
-			
-
-			#expect( warmup.calls_some_methods("string")).to receive(:reverse!).and_return( nil )
-			#warmup.calls_some_methods("string")
 
 			warmup.calls_some_methods( string )
 
